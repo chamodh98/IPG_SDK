@@ -18,10 +18,10 @@ class MainActivity : AppCompatActivity() {
         openWeb.setOnClickListener {
             SDKManager.lunchPaymentView(
                 this,
-                "eyJhbGciOiJIUzUxMiJ9.eyJtaWQiOiIwMDAwMTg5NCJ9.u1OqIhWsZ0_ceQmdZQyWBrfiP6A5mjACzuxbitRLp1K8DwMF5ehkKEyzSpWtQXyhbqqcyOFHWS-X28zy3hfbMw",
+                "eyJhbGciOiJIUzUxMiJ9.eyJhcHBsaWNhdGlvblR5cGUiOiJBTkRST0lEIiwibWlkIjoiMDAwMDE4OTQifQ.Oi-n6HcVvn9JFzbIyBBcEn4uffDgYxOKyfK6HAE0RE9T_PDlz8wTKn5Q1ui-n3yt5RtWQ3k3CxQLVhDTQXaOaQ",
                 "OID123456",
                 "Order Description",
-                "100.00",
+                "250.25",
                 "John Doe",
                 "0771234567",
                 "test@email.com"
@@ -37,8 +37,10 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onActivityResult(requestCode, resultCode, data, caller)
         if (requestCode == SDKManager.paymentRequest && resultCode == RESULT_OK) {
-            val result = data?.getStringExtra("paymentResult")
-            Log.e("SDK Result", "Received from SDK: $result")
+            val transactionStatus = data?.getStringExtra("transactionStatus")
+            val transactionMessage = data?.getStringExtra("transactionMessage")
+            val transactionReference = data?.getStringExtra("transactionReference")
+            Log.e("SDK Result", "Received from SDK: transactionStatus - $transactionStatus , transactionMessage - $transactionMessage - transactionReference - $transactionReference")
         }
     }
 }

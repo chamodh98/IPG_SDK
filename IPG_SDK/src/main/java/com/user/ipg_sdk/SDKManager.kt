@@ -27,7 +27,6 @@ class SDKManager {
             val intent = Intent(activity, ActWebView::class.java).apply {
                 putExtra(
                     "paymentData",
-                    toJson(
                         setPaymentData(
                             merchantWebToken,
                             orderId,
@@ -36,8 +35,7 @@ class SDKManager {
                             customerName,
                             customerPhone,
                             customerEmail
-                    )
-                    )
+                        )
                 )
             }
             activity.startActivityForResult(intent, paymentRequest)
@@ -61,19 +59,6 @@ class SDKManager {
                 customerPhone = customerPhone,
                 customerEmail = customerEmail
             )
-        }
-
-        private fun toJson(paymentData: PaymentData): String {
-            val json = JSONObject().apply {
-                put("merchantWebToken",  paymentData.merchantWebToken)
-                put("orderId",  paymentData.orderId)
-                put("orderDescription",  paymentData.orderDescription)
-                put("totalAmount",  paymentData.totalAmount)
-                put("customerName",  paymentData.customerName)
-                put("customerPhone",  paymentData.customerPhone)
-                put("customerEmail",  paymentData.customerEmail)
-            }
-            return json.toString()
         }
     }
 }

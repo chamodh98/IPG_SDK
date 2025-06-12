@@ -24,39 +24,35 @@ internal class ActWebView : AppCompatActivity() {
         webSettings.javaScriptEnabled = true
 
         webView.webViewClient= WebViewClient()
-        webView.addJavascriptInterface(WebAppInterface(this),"AndroidInterface")
+        webView.addJavascriptInterface(WebAppInterface(this),"JSInterface")
 
-        val paymentData = intent.getStringExtra("paymentData") ?: ""
-        val url = "http://34.126.78.221:80/ipg/checkout/sdk/init/android"
-        Log.e("URL", url )
-        Log.e("URL_paymentData", paymentData )
+        val paymentData: PaymentData? = intent.getParcelableExtra("paymentData")
+        val url = "https://developer.ipay.lk/ipg/checkout/sdk/android"
+        webView.loadUrl(url)
 
-        val js = """
-            javascript:(function() {
-               fetch('$url', {
-                  method: "POST",
-                  headers: {
-                      "Content-Type": "application/json"
-                  },
-                  body: '$paymentData'
-               })
-               .then(response => response.text())
-               .then(data => {
-                   console.log("Success:", data);
-                   document.body.innerHTML = data;
-                   AndroidInterface.receiveParams(data);
-               })
-               .catch((error) => {
-                   console.error("Error:", error);
-               });
-            })()
-        """.trimIndent()
+        val webToken = "eyJhbGciOiJIUzUxMiJ9.eyJhcHBsaWNhdGlvblR5cGUiOiJBTkRST0lEIiwibWlkIjoiMDAwMDE4OTQifQ.Oi-n6HcVvn9JFzbIyBBcEn4uffDgYxOKyfK6HAE0RE9T_PDlz8wTKn5Q1ui-n3yt5RtWQ3k3CxQLVhDTQXaOaQ"
+        val escapedToken = webToken.replace("'", "\\'")
 
-        webView.loadUrl("about:blank") // Load a blank page first to avoid loading the URL before the JavaScript is ready
+        val jsCode = """
+                initSdkCheckout(
+                    'com.ipay.mobile.sdk',
+                    '${paymentData?.merchantWebToken}',
+                    '${paymentData?.totalAmount}',
+                    '${paymentData?.orderId}',
+                    '${paymentData?.orderDescription}',
+                    '',
+                    '${paymentData?.customerName}',
+                    '${paymentData?.customerPhone}',
+                    '${paymentData?.customerEmail}',
+                    '',
+                    ''
+                )
+                """
+
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                view?.evaluateJavascript(js, null) // Load the JavaScript code after the page is loaded
+                view?.evaluateJavascript(jsCode, null) // Load the JavaScript code after the page is loaded
             }
         }
 
@@ -68,11 +64,13 @@ internal class ActWebView : AppCompatActivity() {
     inner class WebAppInterface(private val activity: ActWebView) {
 
         @JavascriptInterface
-        fun receiveParams(param: String) {
+        fun sdkSuccessCallback(transactionStatus: String, transactionMessage: String, transactionReference: String) {
             activity.runOnUiThread {
-                Toast.makeText(activity,"Received -: $param", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity,"Received -: $transactionStatus $transactionMessage $transactionReference", Toast.LENGTH_LONG).show()
                 var resultIntent = Intent()
-                resultIntent.putExtra("paymentResult", param)
+                resultIntent.putExtra("transactionStatus", transactionStatus)
+                resultIntent.putExtra("transactionMessage", transactionMessage)
+                resultIntent.putExtra("transactionReference", transactionReference)
                 activity.setResult(RESULT_OK, resultIntent)
                 activity.finish()
             }
