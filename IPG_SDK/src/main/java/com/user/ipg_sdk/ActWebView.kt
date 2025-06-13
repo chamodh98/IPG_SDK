@@ -64,7 +64,6 @@ internal class ActWebView : AppCompatActivity() {
         @JavascriptInterface
         fun sdkSuccessCallback(transactionStatus: String, transactionMessage: String, transactionReference: String) {
             activity.runOnUiThread {
-                Toast.makeText(activity,"Received -: $transactionStatus $transactionMessage $transactionReference", Toast.LENGTH_LONG).show()
                 var resultIntent = Intent()
                 resultIntent.putExtra("transactionStatus", transactionStatus)
                 resultIntent.putExtra("transactionMessage", transactionMessage)

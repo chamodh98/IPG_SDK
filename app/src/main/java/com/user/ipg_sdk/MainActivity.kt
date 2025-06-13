@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             val transactionStatus = data?.getStringExtra("transactionStatus")
             val transactionMessage = data?.getStringExtra("transactionMessage")
             val transactionReference = data?.getStringExtra("transactionReference")
+            Toast.makeText(this,"Received -: $transactionStatus $transactionMessage $transactionReference", Toast.LENGTH_LONG).show()
             Log.e("SDK Result", "Received from SDK: transactionStatus - $transactionStatus , transactionMessage - $transactionMessage - transactionReference - $transactionReference")
         }
     }
