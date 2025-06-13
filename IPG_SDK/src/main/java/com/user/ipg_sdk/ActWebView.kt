@@ -30,13 +30,11 @@ internal class ActWebView : AppCompatActivity() {
         val url = "https://developer.ipay.lk/ipg/checkout/sdk/android"
         webView.loadUrl(url)
 
-        val webToken = "eyJhbGciOiJIUzUxMiJ9.eyJhcHBsaWNhdGlvblR5cGUiOiJBTkRST0lEIiwibWlkIjoiMDAwMDE4OTQifQ.Oi-n6HcVvn9JFzbIyBBcEn4uffDgYxOKyfK6HAE0RE9T_PDlz8wTKn5Q1ui-n3yt5RtWQ3k3CxQLVhDTQXaOaQ"
-        val escapedToken = webToken.replace("'", "\\'")
-
+        val escapedToken = paymentData?.merchantWebToken?.replace("'", "\\'")
         val jsCode = """
                 initSdkCheckout(
                     'com.ipay.mobile.sdk',
-                    '${paymentData?.merchantWebToken}',
+                    '${escapedToken}',
                     '${paymentData?.totalAmount}',
                     '${paymentData?.orderId}',
                     '${paymentData?.orderDescription}',

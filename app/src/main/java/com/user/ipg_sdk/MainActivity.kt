@@ -1,11 +1,13 @@
 package com.user.ipg_sdk
 
+import android.app.Activity.RESULT_OK
 import android.app.ComponentCaller
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -32,10 +34,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
-        data: Intent?,
-        caller: ComponentCaller
+        data: Intent?
     ) {
-        super.onActivityResult(requestCode, resultCode, data, caller)
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SDKManager.paymentRequest && resultCode == RESULT_OK) {
             val transactionStatus = data?.getStringExtra("transactionStatus")
             val transactionMessage = data?.getStringExtra("transactionMessage")
