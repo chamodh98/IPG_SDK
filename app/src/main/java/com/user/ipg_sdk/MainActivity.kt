@@ -1,14 +1,11 @@
 package com.user.ipg_sdk
 
-import android.app.Activity.RESULT_OK
-import android.app.ComponentCaller
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         val openWeb = findViewById<Button>(R.id.btnOpenWeb)
 
         openWeb.setOnClickListener {
-            SDKManager.lunchPaymentView(
+            IPGSDKManager.lunchPaymentView(
                 this,
                 "eyJhbGciOiJIUzUxMiJ9.eyJhcHBsaWNhdGlvblR5cGUiOiJBTkRST0lEIiwibWlkIjoiMDAwMDE4OTQifQ.Oi-n6HcVvn9JFzbIyBBcEn4uffDgYxOKyfK6HAE0RE9T_PDlz8wTKn5Q1ui-n3yt5RtWQ3k3CxQLVhDTQXaOaQ",
                 "OID123456",
@@ -38,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         data: Intent?
     ) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SDKManager.paymentRequest && resultCode == RESULT_OK) {
+        if (requestCode == IPGSDKManager.paymentRequest && resultCode == RESULT_OK) {
             val transactionStatus = data?.getStringExtra("transactionStatus")
             val transactionMessage = data?.getStringExtra("transactionMessage")
             val transactionReference = data?.getStringExtra("transactionReference")

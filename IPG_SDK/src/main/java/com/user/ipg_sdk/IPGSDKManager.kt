@@ -1,16 +1,13 @@
 package com.user.ipg_sdk
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import org.json.JSONObject
 
 /**
  * Created by Chamod Hettiarachchi on 2025-04-16
  */
 
-class SDKManager {
+class IPGSDKManager {
     companion object {
         const val paymentRequest = 999
 
