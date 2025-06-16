@@ -61,4 +61,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(project(":IPG_SDK"))
+//    implementation("com.github.chamodh98:IPG_SDK:1.0.0")
 }

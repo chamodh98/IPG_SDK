@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
             IPGSDKManager.lunchPaymentView(
                 this,
                 "eyJhbGciOiJIUzUxMiJ9.eyJhcHBsaWNhdGlvblR5cGUiOiJBTkRST0lEIiwibWlkIjoiMDAwMDE4OTQifQ.Oi-n6HcVvn9JFzbIyBBcEn4uffDgYxOKyfK6HAE0RE9T_PDlz8wTKn5Q1ui-n3yt5RtWQ3k3CxQLVhDTQXaOaQ",
+                SDKEnvironment.DEVELOPMENT,
                 "OID123456",
                 "Order Description",
                 "250.25",

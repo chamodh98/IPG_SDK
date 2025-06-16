@@ -27,8 +27,8 @@ internal class ActWebView : AppCompatActivity() {
         webView.addJavascriptInterface(WebAppInterface(this),"JSInterface")
 
         val paymentData: PaymentData? = intent.getParcelableExtra("paymentData")
-        val url = "https://developer.ipay.lk/ipg/checkout/sdk/android"
-        webView.loadUrl(url)
+        val url: String? = intent.getStringExtra("webUrl")
+        webView.loadUrl(url?: "https://ipay.lk/ipg/checkout/sdk/android")
 
         val escapedToken = paymentData?.merchantWebToken?.replace("'", "\\'")
         val jsCode = """

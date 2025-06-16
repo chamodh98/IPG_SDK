@@ -14,6 +14,7 @@ class IPGSDKManager {
         fun lunchPaymentView(
             activity: Activity,
             merchantWebToken: String,
+            environment: SDKEnvironment,
             orderId: String,
             orderDescription: String,
             totalAmount: String,
@@ -24,15 +25,19 @@ class IPGSDKManager {
             val intent = Intent(activity, ActWebView::class.java).apply {
                 putExtra(
                     "paymentData",
-                        setPaymentData(
-                            merchantWebToken,
-                            orderId,
-                            orderDescription,
-                            totalAmount,
-                            customerName,
-                            customerPhone,
-                            customerEmail
-                        )
+                    setPaymentData(
+                        merchantWebToken,
+                        orderId,
+                        orderDescription,
+                        totalAmount,
+                        customerName,
+                        customerPhone,
+                        customerEmail
+                    )
+                )
+                putExtra(
+                    "webUrl",
+                    setSDKUrl(environment)
                 )
             }
             activity.startActivityForResult(intent, paymentRequest)
@@ -56,6 +61,15 @@ class IPGSDKManager {
                 customerPhone = customerPhone,
                 customerEmail = customerEmail
             )
+        }
+
+        private fun setSDKUrl(environment: SDKEnvironment): String {
+            return when (environment) {
+                SDKEnvironment.LIVE -> "https://ipay.lk/ipg/checkout/sdk/android"
+                SDKEnvironment.DEVELOPMENT -> "https://developer.ipay.lk/ipg/checkout/sdk/android"
+                SDKEnvironment.STAGING -> "https://staging.ipay.lk/ipg/checkout/sdk/android"
+                SDKEnvironment.SANDBOX -> "https://sandbox.ipay.lk/ipg/checkout/sdk/android"
+            }
         }
     }
 }
