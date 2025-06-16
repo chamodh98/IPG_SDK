@@ -1,6 +1,8 @@
 # Project exclude paths
 *.iml
-.gradle
+
+IPG_SDK/build/
+
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -9,7 +11,13 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
+
+# Gradle files
+.gradle
+.gradle/
+build/
+*/build/
+
 /captures
 .externalNativeBuild
 .cxx
