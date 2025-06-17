@@ -19,7 +19,7 @@ class IPGSDKManager {
             orderDescription: String,
             totalAmount: String,
             customerName: String,
-            customerPhone: String,
+            customerMobile: String,
             customerEmail: String
         ) {
             val intent = Intent(activity, ActWebView::class.java).apply {
@@ -31,7 +31,7 @@ class IPGSDKManager {
                         orderDescription,
                         totalAmount,
                         customerName,
-                        customerPhone,
+                        customerMobile,
                         customerEmail
                     )
                 )
@@ -49,7 +49,7 @@ class IPGSDKManager {
             orderDescription: String,
             totalAmount: String,
             customerName: String,
-            customerPhone: String,
+            customerMobile: String,
             customerEmail: String
         ): PaymentData {
             return PaymentData(
@@ -58,7 +58,7 @@ class IPGSDKManager {
                 orderDescription = orderDescription,
                 totalAmount = totalAmount,
                 customerName = customerName,
-                customerPhone = customerPhone,
+                customerMobile = customerMobile,
                 customerEmail = customerEmail
             )
         }

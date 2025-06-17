@@ -40,7 +40,7 @@ internal class ActWebView : AppCompatActivity() {
                     '${paymentData?.orderDescription}',
                     '',
                     '${paymentData?.customerName}',
-                    '${paymentData?.customerPhone}',
+                    '${paymentData?.customerMobile}',
                     '${paymentData?.customerEmail}',
                     '',
                     ''

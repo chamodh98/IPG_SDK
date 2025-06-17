@@ -60,6 +60,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(project(":IPG_SDK"))
-//    implementation("com.github.chamodh98:IPG_SDK:1.0.0")
+//    implementation(project(":IPG_SDK"))
+//    implementation("com.github.chamodh98:IPG_SDK:1.1.1")
+//    implementation(name: 'IPG_SDK-release', ext: 'aar')
+    implementation(files("libs/IPG_SDK-release.aar"))
 }

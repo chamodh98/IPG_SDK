@@ -19,6 +19,6 @@ data class PaymentData (
     var subMerchantReference: String = "",
     var totalAmount: String = "",
     var customerName: String = "",
-    var customerPhone: String = "",
+    var customerMobile: String = "",
     var customerEmail: String = ""
 ) : Parcelable
